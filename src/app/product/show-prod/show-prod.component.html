@@ -1,0 +1,102 @@
+<div class="container">
+
+    <br><br>
+<!-- Button trigger modal -->
+<button type="button" (click)="ChangeFlag()" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+ Add Product
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" 
+aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form >
+                  <div class="form-froup row">
+                    <!-- <label class="col-sm-2 col-form-label" *ngIf="1==2"  > Product ID</label> -->
+                    <!-- <div class="col-sm-10">
+                    
+                        <input type="number" class="form-control" 
+                          [(ngModel)]="productForm.P_Id" name="prodId" [disabled]="1==1" >
+                    
+                    </div> -->
+
+
+          <label class="col-sm-2 col-form-label" > Product Name</label>
+          <div class="col-sm-10">
+          
+              <input type="text" class="form-control"  [(ngModel)]="productForm.p_Name" name="name"  placeholder="Enter Name">
+          
+          </div>
+          
+          <label class="col-sm-2 col-form-label" >  Product Price  </label>
+          <div class="col-sm-10">
+          
+              <input type="number" class="form-control"  [(ngModel)]="productForm.P_Price" name="price"  placeholder="Enter Name">
+          
+          </div>
+          </div>
+          <!-- <button (click)="addProduct()" *ngIf="prod.P_Id==0" class="btn btn-primary"  > Add    </button>
+          
+          <button (click)="UpdateProduct()" *ngIf="prod.P_Id!=0" class="btn btn-primary"  > Update    </button>
+           -->
+           <!-- <button type="submit" (click)="onSubmit(productForm)" >save</button> -->
+           <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button *ngIf="editFlag" type="submit" (click)="onSubmit(productForm)"
+             class="btn btn-primary">Save changes</button>
+
+             <button *ngIf="!editFlag" type="submit" (click)="update(productForm)"
+             class="btn btn-primary">update changes</button>
+             
+          </div>
+          </form>
+
+      </div>
+     
+    </div>
+  </div>
+</div>
+
+
+<!--End of modal-->
+
+  <br>  <br>
+
+<label > Search</label>
+  <input class="form-control" type="text" #query (keyup)="filter(query.value)">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Product Name</th>
+              <th scope="col">Price</th>
+              <th scope="col">Last Update</th>
+              <th scope="col">Options</th>
+            </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor="let item of getProductList; let i = index;">
+                <td>{{i+1}}</td>
+                  <td>{{item.p_Name}}</td>
+                  <td>{{item.P_Price}}</td>
+                  <td>{{item.P_LastUpdate}}</td>
+                  <td>
+                    <button type="button" class="btn btn-warning mr-5 ml-3"
+                    (click)="editeClick(item)"
+                    data-bs-toggle="modal" data-bs-target="#exampleModal"
+                    
+                    >Edite</button>
+                    
+                    <button type="button" class="btn btn-danger mr-1"(click)="deleteProductById(item)" >Delete</button>
+                  </td>
+              </tr>
+          </tbody>
+    </table>
+
+</div>
